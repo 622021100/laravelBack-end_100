@@ -69,12 +69,21 @@ class ProductController extends Controller
         //     'price' => 'required',
         // ]);
 
-        $product = Product::find($id);
-        $product->product_name = $request->product_name;
-        $product->product_type = $request->product_type;
-        $product->price = $request->price;
+        // $product = Product::find($id);
+        // $product->product_name = $request->product_name;
+        // $product->product_type = $request->product_type;
+        // $product->price = $request->price;
+        $result = ['name'=>'update', 'payload'=>$product];    
+        $product = Product::where('id',$id)->update([
+            'product_name' => $request->product_name,
+            'product_type' => $request->product_type,
+            'price' => $request->price,
+        ]);
 
-        $result = ['name'=>'update', 'status'=> $product->save(), 'payload'=>$request->all(), 'id'=>$id];
+        // $result = ['name'=>'update', 'status'=> $product->save(), 'payload'=>$request->all(), 'id'=>$id];
+        // return $result;
+
+        // $result = ['name'=>'update', 'status'=> $product->save(), 'payload'=>$request->all(), 'id'=>$id];
         return $result;
     }
 

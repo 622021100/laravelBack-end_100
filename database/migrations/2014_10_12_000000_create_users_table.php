@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique(); // unique ไม่ซ้ำอีเมลกัน
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('address');
+            $table->tinyInteger('role')->default(2);
             $table->rememberToken();
             $table->timestamps();
         });
