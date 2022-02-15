@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         $result = ['name'=>'index', 'payload'=>Product::all()];
-        return $result;
+        return response($result, 200);
     }
 
     /**
@@ -39,7 +39,7 @@ class ProductController extends Controller
         ]);
 
         $result = ['name'=>'store', 'payload'=> $product];
-        return $result;
+        return response($result, 201);
     }
 
     /**
@@ -51,7 +51,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $result = ['name'=>'show', 'payload'=>Product::find($id)];
-        return $result;
+        return response($result, 200);
     }
 
     /**
@@ -63,28 +63,19 @@ class ProductController extends Controller
      */
     public function update(Request $request, $product, $id)
     {
-        // $fields = $request->validate([
-        //     'product_name' => 'required',
-        //     'product_type' => 'required|integer',
-        //     'price' => 'required',
-        // ]);
-
-        // $product = Product::find($id);
-        // $product->product_name = $request->product_name;
-        // $product->product_type = $request->product_type;
-        // $product->price = $request->price;
-        $result = ['name'=>'update', 'payload'=>$product];    
-        $product = Product::where('id',$id)->update([
-            'product_name' => $request->product_name,
-            'product_type' => $request->product_type,
-            'price' => $request->price,
+        $fields = $request->validate([
+            'product_name' => 'required|string',
+            'product_type' => 'required|integer',
+            'price' => 'required',
         ]);
 
-        // $result = ['name'=>'update', 'status'=> $product->save(), 'payload'=>$request->all(), 'id'=>$id];
-        // return $result;
+        $product = Product::where("id",$id)->update($request->all());
 
-        // $result = ['name'=>'update', 'status'=> $product->save(), 'payload'=>$request->all(), 'id'=>$id];
-        return $result;
+        $result = [
+            'name' => 'update',
+            'payload' => $product,
+        ];
+        return response($result, 200);
     }
 
     /**
