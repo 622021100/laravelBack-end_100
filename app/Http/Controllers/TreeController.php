@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\Tree;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
-class ProductController extends Controller
+class TreeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $result = ['name'=>'index', 'payload'=>Product::all()];
+        $result = ['name'=>'index', 'payload'=>Tree::all()];
         return response($result, 200);
     }
 
@@ -27,30 +28,32 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $fields = $request->validate([
-            'product_name' => 'required',
-            'product_type' => 'required|integer',
-            'price' => 'required',
+            'Tree_name' => 'required',
+            'Tree_mean' => 'required',
+            'Tree_Feature'=> 'requtred',
+            'Tree_PT' => 'required',
         ]);
 
-        $product = Product::create([
-            'product_name' => $fields['product_name'],
-            'product_type' => $fields['product_type'],
-            'price' => $fields['price'],
+        $tree = Tree::create([
+            'Tree_name' => $fields['Tree_name'],
+            'Tree_mean' => $fields['Tree_mean'],
+            'Tree_Feature' => $fields['Tree_Feature'],
+            'Tree_PT' => $fields['Tree_PT'],
         ]);
 
-        $result = ['name'=>'store', 'payload'=> $product];
+        $result = ['name'=>'store', 'payload'=> $tree];
         return response($result, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Tree  $product
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $result = ['name'=>'show', 'payload'=>Product::find($id)];
+        $result = ['name'=>'show', 'payload'=>Tree::find($id)];
         return response($result, 200);
     }
 
@@ -58,22 +61,23 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Tree  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $product, $id)
+    public function update(Request $request, $tree, $id)
     {
         $fields = $request->validate([
-            'product_name' => 'required|string',
-            'product_type' => 'required|integer',
-            'price' => 'required',
+            'Tree_name' => 'required|string',
+            'Tree_mean' => 'required|string',
+            'Tree_Feature' => 'required|string',
+            'Tree_PT' => 'required|string',
         ]);
 
-        $product = Product::where("id",$id)->update($request->all());
+        $tree = Tree::where("id",$id)->update($request->all());
 
         $result = [
             'name' => 'update',
-            'payload' => $product,
+            'payload' => $tree,
         ];
         return response($result, 200);
     }
@@ -81,13 +85,13 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Tree  $product
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $product = Product::where('id', $id);
-        $product->delete();
+        $tree = Tree::where('id', $id);
+        $tree->delete();
         $result = ['name'=>'destroy', 'payload'=>'Deleted.'];
         return $result;
     }

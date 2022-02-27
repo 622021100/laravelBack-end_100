@@ -1,10 +1,9 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ProductController;
-use Illuminate\Auth\Events\Logout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TreeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +23,7 @@ Route::post('login', [AuthController::class , 'login']);
 //Protected Route
 Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::post('logout', [AuthController::class, 'logout']);
-    Route::resource('products', ProductController::class);
+    Route::resource('trees', TreeController::class);
 });
 
 
