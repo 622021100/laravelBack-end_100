@@ -68,9 +68,9 @@ class TreeController extends Controller
     {
         $fields = $request->validate([
             'Tree_name' => 'required|string',
-            'Tree_mean' => 'required|string',
-            'Tree_Feature' => 'required|string',
-            'Tree_PT' => 'required|string',
+            'Tree_mean' => 'required',
+            'Tree_Feature' => 'required',
+            'Tree_PT' => 'required',
         ]);
 
         $tree = Tree::where("id",$id)->update($request->all());
