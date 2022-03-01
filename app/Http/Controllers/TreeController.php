@@ -29,16 +29,16 @@ class TreeController extends Controller
     {
         $fields = $request->validate([
             'Tree_name' => 'required',
-            'Tree_mean' => 'required',
-            'Tree_Feature'=> 'requtred',
-            'Tree_PT' => 'required',
+            // 'Tree_mean' => 'required',
+            // 'Tree_Feature'=> 'requtred',
+            // 'Tree_PT' => 'required',
         ]);
 
         $tree = Tree::create([
             'Tree_name' => $fields['Tree_name'],
-            'Tree_mean' => $fields['Tree_mean'],
-            'Tree_Feature' => $fields['Tree_Feature'],
-            'Tree_PT' => $fields['Tree_PT'],
+            // 'Tree_mean' => $fields['Tree_mean'],
+            // 'Tree_Feature' => $fields['Tree_Feature'],
+            // 'Tree_PT' => $fields['Tree_PT'],
         ]);
 
         $result = ['name'=>'store', 'payload'=> $tree];
@@ -68,9 +68,9 @@ class TreeController extends Controller
     {
         $fields = $request->validate([
             'Tree_name' => 'required|string',
-            'Tree_mean' => 'required',
-            'Tree_Feature' => 'required',
-            'Tree_PT' => 'required',
+            // 'Tree_mean' => 'required',
+            // 'Tree_Feature' => 'required',
+            // 'Tree_PT' => 'required',
         ]);
 
         $tree = Tree::where("id",$id)->update($request->all());
